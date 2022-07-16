@@ -1,9 +1,8 @@
 import type { NextPage } from 'next';
-import Head from 'next/head';
-import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
+import CardSurahWrapper from '../components/CardSurahWrapper';
+import SimpleSidebar from '../components/Sidebar';
 import { getSurahData } from '../services/surah-data';
-import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
   const [surahQuran, setSurahQuran] = useState([]);
@@ -19,9 +18,23 @@ const Home: NextPage = () => {
 
   return (
     <>
-      {surahQuran.map((surah) => {
-        return <h1>{surah.name}</h1>;
-      })}
+      <SimpleSidebar>
+        {surahQuran.map((surah, index) => {
+          return (
+            <CardSurahWrapper
+              key={index}
+              arti={surah.arti}
+              audio={surah.audio}
+              deskripsi={surah.deskripsi}
+              jumlah_ayat={surah.jumlah_ayat}
+              nama={surah.nama}
+              tempat_turun={surah.tempat_turun}
+              nomor={surah.nomor}
+              nama_latin={surah.nama_latin}
+            />
+          );
+        })}
+      </SimpleSidebar>
     </>
   );
 };
